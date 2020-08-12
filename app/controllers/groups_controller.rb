@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: %i[show update destroy]
+  before_action :set_group, only: %i[show update destroy overall_debt_view simplified_debt_view]
 
   def index
     @groups = Group.all
@@ -24,6 +24,13 @@ class GroupsController < ApplicationController
     @group.destroy
     head :no_content
   end
+
+  def overall_debt_view
+    @overall_debt_view = @group.overall_debt_view
+    json_response(@overall_debt_view)
+  end
+
+  def simplified_debt_view; end
 
   private
 
