@@ -26,11 +26,12 @@ class GroupsController < ApplicationController
   end
 
   def overall_debt_view
-    @overall_debt_view = @group.overall_debt_view
-    json_response(@overall_debt_view)
+    json_response(@group.overall_debt_view)
   end
 
-  def simplified_debt_view; end
+  def simplified_debt_view
+    json_response(@group.simplified_debt_view)
+  end
 
   private
 

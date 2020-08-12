@@ -25,3 +25,43 @@ Expense.create(group_member_id: bob_gm.id, owe_to_group_member_id: david_gm.id, 
 Expense.create(group_member_id: charlie_gm.id, owe_to_group_member_id: bob_gm.id, amount: 30)
 Expense.create(group_member_id: charlie_gm.id, owe_to_group_member_id: david_gm.id, amount: 10)
 Expense.create(group_member_id: david_gm.id, owe_to_group_member_id: fred_gm.id, amount: 45)
+
+
+ajay = User.create(first_name: 'Ajay', last_name: '')
+arun = User.create(first_name: 'Arun', last_name: '')
+charl = User.create(first_name: 'Charl', last_name: '')
+dav = User.create(first_name: 'Dav', last_name: '')
+franco = User.create(first_name: 'Franco', last_name: '')
+jeev = User.create(first_name: 'Jeev', last_name: 'Dey')
+ema = User.create(first_name: 'Ema', last_name: 'DFran')
+dora = User.create(first_name: 'Dora', last_name: 'Lona')
+
+
+group = Group.find_by(name: 'Seaview')
+
+# Adding user to group
+User.where(first_name: %w[Ajay Arun Charl Dav Franco Jeev Ema Dora]).find_each do |user|
+  GroupMember.create(user_id: user.id, group_id: group.id)
+end
+
+#Expenses of each group member
+ajay_gm = GroupMember.find_by(user_id: ajay.id, group_id: group.id)
+arun_gm = GroupMember.find_by(user_id: arun.id, group_id: group.id)
+charl_gm = GroupMember.find_by(user_id: charl.id, group_id: group.id)
+dav_gm = GroupMember.find_by(user_id: dav.id, group_id: group.id)
+franco_gm = GroupMember.find_by(user_id: franco.id, group_id: group.id)
+jeev_gm = GroupMember.find_by(user_id: jeev.id, group_id: group.id)
+ema_gm = GroupMember.find_by(user_id: ema.id, group_id: group.id)
+dora_gm = GroupMember.find_by(user_id: dora.id, group_id: group.id)
+
+
+Expense.create(group_member_id: arun_gm.id, owe_to_group_member_id: charl_gm.id, amount: 40)
+Expense.create(group_member_id: arun_gm.id, owe_to_group_member_id: ema_gm.id, amount: 80)
+
+Expense.create(group_member_id: charl_gm.id, owe_to_group_member_id: ajay_gm.id, amount: 80)
+Expense.create(group_member_id: ema_gm.id, owe_to_group_member_id: dav_gm.id, amount: 120)
+
+Expense.create(group_member_id: jeev_gm.id, owe_to_group_member_id: franco_gm.id, amount: 300)
+Expense.create(group_member_id: jeev_gm.id, owe_to_group_member_id: dav_gm.id, amount: 80)
+Expense.create(group_member_id: franco_gm.id, owe_to_group_member_id: arun_gm.id, amount: 145)
+Expense.create(group_member_id: ema_gm.id, owe_to_group_member_id: ajay_gm.id, amount: 145)
